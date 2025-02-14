@@ -10,7 +10,6 @@ const Navigation = () => {
       className="text-white shadow-lg py-4 px-6 sm:px-10 flex justify-between items-center"
       style={{
         background: "transparent",
-        borderBottom: "1rem solid black",
       }}
     >
       {/* Logo / Brand */}
@@ -64,33 +63,34 @@ const Navigation = () => {
 
       {/* Mobile Navigation Menu */}
       <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        animate={isMenuOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
-        transition={{ duration: 0.3 }}
-        className="absolute top-16 left-0 w-full bg-transparent text-center sm:hidden z-50"
-      >
-        <ul className="grid grid-cols-2 gap-x-6 gap-y-4 p-4">
-          {[
-            { label: "Home", path: "/" },
-            { label: "Projects", path: "/projects" },
-            { label: "About", path: "/about" },
-            { label: "Contact", path: "/contact" },
-          ].map((link, index) => (
-            <li key={index}>
-              <Link
-                to={link.path}
-                className="text-lg font-medium px-4 py-2 block text-green-200 hover:text-green-300"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setTimeout(() => setMenuOpen(false), 150);
-                }}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </motion.div>
+  initial={{ opacity: 0, height: 0 }}
+  animate={isMenuOpen ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+  transition={{ duration: 0.3 }}
+  className="absolute top-16 left-0 w-full bg-transparent text-center sm:hidden z-50"
+>
+  <ul className="grid grid-cols-2 gap-x-6 gap-y-8 p-4 my-6" style={{ marginTop: '2rem' }}>
+    {[
+      { label: "Home", path: "/" },
+      { label: "Projects", path: "/projects" },
+      { label: "About", path: "/about" },
+      { label: "Contact", path: "/contact" },
+    ].map((link, index) => (
+      <li key={index}>
+        <Link
+          to={link.path}
+          className="text-lg font-medium px-4 py-3 block text-green-200 hover:text-green-300"
+          onClick={(e) => {
+            e.stopPropagation();
+            setTimeout(() => setMenuOpen(false), 150);
+          }}
+        >
+          {link.label}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</motion.div>
+
     </nav>
   );
 };

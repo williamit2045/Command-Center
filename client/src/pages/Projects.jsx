@@ -1,8 +1,10 @@
 import React from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import PropTypes from 'prop-types';
-import textureB from '../assets/spiration-dark.webp';
-import textureA from '../assets/folk-pattern-black.webp';
+import { motion } from 'framer-motion';
+import textureB from '../assets/images/artworks-000373153020-rrpx00-t500x500.jpg';
+import textureA from '../assets/connectwork.webp';
+import sand from '../assets/images/sand.webp';
 
 const projectData = [
   {
@@ -53,11 +55,12 @@ const projectData = [
 
 const ProjectCard = ({ project }) => (
   <div
-    className="bg-black rounded-lg overflow-hidden transition-all duration-300 hover:bg-texture"
+    className="bg-black overflow-hidden transition-all duration-300 hover:bg-texture"
     style={{
       backgroundImage: `url(${textureA})`,
       backgroundSize: 'auto',
       backgroundRepeat: 'repeat',
+      border: '18px solid rgba(44, 50, 221, 0.1)',
     }}
   >
     <div className="p-6 space-y-4">
@@ -111,36 +114,88 @@ ProjectCard.propTypes = {
 const Projects = () => {
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-gray-900 to-black p-8"
-      style={{
-        backgroundImage: `url(${textureB})`,
-        backgroundSize: 'auto',
-        backgroundRepeat: 'repeat',
-      }}
-    >
-      <div className="max-w-6xl mx-auto">
+    className="min-h-screen text-white relative"
+    style={{
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(${textureB})`,
+      backgroundSize: 'cover', /* Ensures full-screen coverage */
+      backgroundPosition: 'center',
+      backgroundAttachment: 'scroll', /* Works across browsers */
+    }}
+  >
+  
+    {/* Semi-Transparent Overlay */}
+    <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
 
-        <div className="flex justify-between items-center mb-12" style={{marginTop: '7rem'}} >
-          <h1 className="text-4xl font-bold text-white">Four Web Projects:</h1>
-          <a
-            href="https://github.com/williamit2045"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-gray-400 hover:text-white"
-          >
-            <Github className="h-6 w-6" />
-            <span>View on GitHub</span>
-          </a>
-        </div>
+    {/* Content Wrapper */}
+    <div className="relative z-10 flex flex-col items-center justify-center px-6 sm:px-12 min-h-screen">
+      
+      {/* Centered Floating Image */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 3, ease: 'easeOut' }}
+        className="w-56 h-56 sm:w-72 sm:h-72 rounded-full mt-36 mb-10 overflow-hidden border-4 border-white/20 shadow-xl flex justify-center"
+      >
+        <img src={sand} alt="Sand" className="object-cover w-full h-full" />
+      </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projectData.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+      {/* Core Message - Scales Correctly */}
+      <motion.h1
+        initial={{ opacity: 0, scale: 0.66 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 10, ease: 'easeOut' }}
+        className="text-[clamp(1rem,3vw,2rem)] font-medium tracking-wide text-amber-400"
+      >
+        Substance Moves Through an Endless Moment.
+      </motion.h1>
+
+      {/* Gradual Appearance of Text (Timed for Scroll) */}
+      <div className="text-center max-w-4xl mt-[25vh] font-semibold">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 7, duration: 12, ease: 'easeOut' }}
+          className="text-[clamp(1.4rem,3vw,2.4em)] mt-[5vh] font-light text-blue-300 whitespace-nowrap sm:whitespace-normal text-center">
+          Time, mind, self—that which cannot be destroyed.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 12, duration: 9, ease: 'easeOut' }}
+          className="text-[clamp(0.6rem,3vw,1.2rem)] mt-[10vh] font-light text-blue-300 whitespace-nowrap sm:whitespace-normal text-center"
+        >
+          Yet those who defy their labels, acknowledging the simple truth are nothing, are heard as boasting.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 15, duration: 5, ease: 'easeOut' }}
+          className="text-[clamp(0.6rem,3vw,1.2rem)] mt-[10vh] font-light text-blue-300"
+        >
+          ...and so the trials come.
+        </motion.p>
       </div>
     </div>
-  );
+
+    {/* Project Cards */}
+    <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 px-6 sm:px-12">
+      {projectData.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
+    </div>
+
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 6, duration: 3, ease: 'easeOut' }}
+      className="relative z-10 text-[clamp(0.7rem,2.8vw,1.3rem)] m-[7vh] font-small text-red-500 whitespace-nowrap sm:whitespace-normal text-center"
+    >
+      To see honorably is to see as if for the first time—without the weight of habit.
+    </motion.p>
+  </div>
+);
 };
 
 export default Projects;
