@@ -13,18 +13,31 @@ const projectData = [
 ];
 
 const Home = () => (
-  <div className="min-h-screen text-white flex flex-col" style={{ backgroundImage: `url(${textureB})`, backgroundRepeat: 'repeat' }}>
-    
-    {/* Full-Screen Initial Section */}
-    <div className="flex flex-col items-center justify-center px-6 sm:px-12 min-h-screen">
+  <div className="min-h-screen text-white flex flex-col relative">
+  <div 
+        className="absolute inset-0"  // Changed to inset-0
+        style={{ 
+          backgroundImage: `url(${textureB})`, 
+          backgroundRepeat: 'repeat',
+          zIndex: 0
+        }} 
+      />
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: 'linear-gradient(45deg, rgba(0,48,0,0.75), rgba(0,0,0.42), rgba(0,0,170,0.35))',
+          zIndex: 1
+        }}
+      />
+    {/* Content Wrapper */}
+    <div className="relative z-10 flex flex-col items-center mt-[10vh] justify-center px-6 sm:px-12 min-h-screen">
       
       {/* Centered Floating Image */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 3, ease: 'easeOut' }}
-        className="w-56 h-56 sm:w-72 sm:h-72 rounded-full mt-36 mb-10 overflow-hidden border-4 border-white/20 shadow-xl flex justify-center"
-      >
+        className="md:w-50 md:h-[50vh] rounded-full mt-[16vh] m-8 mb-10 overflow-hidden border-[1.4rem] border-white/20 shadow-xl flex justify-center">
         <img src={abstractBrainHeart} alt="Abstract Brain and Heart" className="object-cover w-full h-full" />
       </motion.div>
 
@@ -39,12 +52,12 @@ const Home = () => (
       </motion.h1>
 
       {/* Gradual Appearance of Text (Timed for Scroll) */}
-      <div className="text-center max-w-3xl mt-24 sm:font-bold">
+      <div className="text-center max-w-3xl mt-8 sm:font-bold">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 5, duration: 7, ease: 'easeOut' }}
-          className="text-[clamp(0.5rem,2.5vw,1.4rem)] mt-[10vh] md:mt-[5vh] font-light tracking-wide text-blue-100"
+          className="text-[clamp(0.4rem,3vw,1.2rem)] mt-5 font-light tracking-wide text-blue-100"
         >
           The more we define ourselves, the more we forget what we are.
         </motion.p>
@@ -53,7 +66,7 @@ const Home = () => (
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 9, duration:5, ease: 'easeOut' }}
-          className="text-[clamp(0.38rem,2.4vw,1.25rem)] mt-[10vh] md:mt-[5vh] md:font-semibold tracking-wide font-light text-orange-100"
+          className="text-[clamp(0.38rem,2.7vw,1.2rem)] mt-5 font-light tracking-wide font-light text-blue-100"
         >
           Unnecessary self-definitions and limits breed insecurity and corruption.
         </motion.p>
@@ -62,15 +75,19 @@ const Home = () => (
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 15, duration: 2, ease: 'easeOut' }}
-          className="text-[clamp(0.4rem,2.5vw,1.5rem)] mt-[10vh] md:mt-[5vh] sm:font-bold tracking-wide text-yellow-200"
+          className="text-[clamp(0.5rem,3.5vw,1.6rem)] mt-5 px-1 font-medium tracking-wide text-yellow-100"
         >
           Freedom, clarity, and connection are available in their absence.
         </motion.p>
       </div>
-    </div>
+    
 
     {/* Projects & Footer Section - Pulls Footer Up */}
-    <div className="flex flex-col items-center justify-center m-12 flex-grow px-6 sm:px-12">
+    <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 15, duration: 4, ease: 'easeOut' }}
+        className="flex flex-col items-center justify-center my-12 flex-grow px-2">
       
       {/* Placeholder Note - Styled for Readability */}
       <p className="text-sm text-center text-gray-400 mt-10 font-semibold sm:font-md">
@@ -94,8 +111,10 @@ const Home = () => (
           </a>
         ))}
       </div>
+      </motion.div>
     </div>
   </div>
+  
 );
 
 export default Home;

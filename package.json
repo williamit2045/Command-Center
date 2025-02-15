@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "server/index.js",
   "scripts": {
+    "dev": "npm run dev:full",
     "start": "node server/index.js",
     "server": "nodemon server/index.js",
     "client": "cd client && npm start",

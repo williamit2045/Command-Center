@@ -50,39 +50,70 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen text-amber" style={{ backgroundImage: `url(${textureA})`, backgroundRepeat: 'repeat' }}>
-      
-      {/* Initial Display Top Section */}
-    <div className="relative min-h-screen flex flex-col items-center justify-center px-6 sm:px-12">
-      
-      {/* Centered Floating Image */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-        className="w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white/20 shadow-xl flex justify-center"
-      >
-        <img src={individual} alt="Abstract Brain and Heart" className="object-cover w-full h-full" />
-      </motion.div>
+    <div className="min-h-screen text-white flex flex-col relative">
+      <div 
+            className="absolute inset-0"  // Changed to inset-0
+            style={{ 
+              backgroundImage: `url(${textureB})`, 
+              backgroundRepeat: 'repeat',
+              zIndex: 0
+            }} 
+          />
+            <div 
+              className="absolute inset-0"
+              style={{
+                backgroundImage: 'linear-gradient(45deg, rgba(0,0,0,0.92), rgba(0,40,0,0.82), rgba(0,0,220,0.52))',
+                zIndex: 1
+              }}
+            />
+              {/* Content Wrapper */}
+              <div className="relative z-10 flex flex-col items-center mt-[3vh] justify-center px-6 sm:px-12 min-h-screen">
+                
+                {/* Centered Floating Image */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 3, ease: 'easeOut' }}
+                  className="md:w-50 md:h-[50vh] rounded-full mt-[16vh] m-8 mb-10 overflow-hidden border-[1.4rem] border-white/20 shadow-xl flex justify-center">
+                  <img src={individual} alt="Individual Worth" className="object-cover w-full h-full" />
+                </motion.div>
 
-      {/* Core Message */}
-      <motion.h1
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-        className="text-5xl sm:text-4xl font-light mt-10 tracking-wide text-yellow-100"
-      >
-       Truth is self evident.
-      </motion.h1>
-    </div>
-   
+                {/* Core Message - Scales Correctly */}
+                <motion.h1
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 20, ease: 'easeOut' }}
+                  className="text-[clamp(2rem,5vw,3.5rem)] font-medium tracking-wide text-green-400"
+                >
+                  
+                  Truth is Self Evident.
+                  
+                  </motion.h1>
+              
+                  <motion.h1
+                  initial={{ opacity: 0, scale: 0.75 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 4, duration: 12, ease: 'easeOut' }}
+                  className="text-[clamp(0.4rem,3vw,1.2rem)] font-light tracking-wide text-blue-100"
+                  >
+                  
+                  The only reason common sense is uncommon is that self-doubt is too common.
+                  
+                  </motion.h1>
+                  <motion.h1
+                  initial={{ opacity: 0, scale: 0.75 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 8, duration: 12, ease: 'easeOut' }}
+                  className="text-[clamp(0.38rem,2.7vw,1.8rem)] mb-[8vh] mt-2 font-light tracking-wide font-light text-blue-100">
+                  It is our ends that connect us, not our understanding.
+                  </motion.h1>
 
       {/* Main Content Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Truth & Integrity Text - Left Column */}
         <div className="lg:col-span-8 prose prose-invert max-w-none">
   <h2 className="text-2xl font-bold text-green-300 mb-6">A Word on Truth & Integrity</h2>
-  <div className="space-y-4 text-green-300">
+  <div className="space-y-4 text-blue-100">
     <p>Some assume I&apos;m not serious, but maybe that&apos;s because we&apos;ve made authenticity so costly that we barely recognize it anymore.</p>
 
     <p>What many call the secret of the universe is no secret at all—it&apos;s simply that truth is self-evident, and yet entire populations are made to feel uncomfortable honoring the obvious. Those who &quot;know the secret&quot; are just those who refuse to betray their simple, present truth. These who do what is right trust the obvious and accept the inferences that follow from it, confident that others who advertize easire paths are decieving themselves. They also accept they may have to make the mistakes that need making, not because it&apos;s comfortable, but because it&apos;s necessary, legitimate and real - even if they will have to suffer a period of self-doubt before the reckoning comes to account.</p>
@@ -92,7 +123,7 @@ const Contact = () => {
 
     <p>As an intellectual, I myself am guilty of indulging in, and benefitting from academic trivialities. As an outsider, I myself have been fooled into self-doubt. Both are self-deception - one wrongly giving me comfort, the other wrongly giving comfort to another.</p>
 
-    <p>That’s why this website—still in development—serves three core purposes:</p>
+    <p>That&apos;s why this website—still in development—serves three core purposes:</p>
     <ol className="list-decimal pl-6 space-y-2">
       <li>My **public portfolio**, showcasing my work, projects, and ideas.</li>
       <li>My **command center**, integrating AI, automation, and web development innovations.</li>
@@ -116,7 +147,7 @@ const Contact = () => {
 
         {/* Social Links - Right Column */}
         <div className="lg:col-span-4 space-y-6">
-          <h3 className="text-md text-yellow-300 font-light italic text-center mb-4">It is our ends that connect us, not our understanding:</h3>
+          <h3 className="text-lg text-green-300 font-bold text-center mb-4">Social Media</h3>
           <div className="flex flex-col space-y-4">
             {SOCIAL_LINKS.map(({ name, url, icon: Icon, description }) => (
               <a
@@ -125,9 +156,13 @@ const Contact = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-800 p-4 rounded-lg flex items-start space-x-4 hover:bg-gray-700 transition-colors duration-300"
-                style={{ backgroundImage: `url(${textureC})`, backgroundRepeat: 'repeat' }}
-              >
-                <Icon className="h-6 w-6 text-blue-400 flex-shrink-0" />
+                style={{ 
+                  backgroundImage: `url(${textureC})`, 
+                  backgroundRepeat: 'repeat', 
+                  border: '2px solid rgba(0, 250, 100, 0.3)',
+                  borderRadius: '2px'
+                }}>
+                <Icon className="h-6 w-6 text-green-400 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold">{name}</h4>
                   <p className="text-sm text-gray-400">{description}</p>
@@ -140,8 +175,15 @@ const Contact = () => {
 
       {/* Contact Form Section */}
       <div className="max-w-2xl mx-auto mt-16 bg-gray-800 p-8 rounded-lg shadow-lg" 
-           style={{ backgroundImage: `url(${textureA})`, backgroundRepeat: 'repeat' }}>
-        <h3 className="text-md text-center text-amber-300 mb-6 italic">The only reason common sense is uncommon is that self-doubt is too common.</h3>
+           style={{ 
+            backgroundImage: `url(${textureC})`, 
+            backgroundRepeat: 'repeat',
+            border: '2px solid rgba(0, 250, 100, 0.3)',
+                  borderRadius: '2px'
+            
+            
+            }}>
+        <h3 className="text-md text-center text-blue-200 mb-6">The only reason common sense is uncommon is that self-doubt is too common.</h3>
         <form onSubmit={handleSubmit} className="space-y-6">
           {['email', 'message'].map((field) => (
             <div key={field}>
@@ -183,6 +225,7 @@ const Contact = () => {
           {status === 'error' && <p className="text-red-400 text-center">Failed to send message. Please try again.</p>}
         </form>
       </div>
+    </div>
     </div>
   );
 };
