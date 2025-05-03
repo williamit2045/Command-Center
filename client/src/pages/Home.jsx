@@ -35,7 +35,7 @@ const Home = () => (
         transition={{ duration: 20, ease: 'easeOut' }}
         className="text-[clamp(2rem,5vw,3rem)] font-medium tracking-wide text-green-400"
       >
-        Where is your freedom?
+         For people who know clarity is overdue,
       </motion.h1>
 
       {/* Gradual Appearance of Text (Timed for Scroll) */}
@@ -46,7 +46,7 @@ const Home = () => (
           transition={{ delay: 5, duration: 7, ease: 'easeOut' }}
           className="text-[clamp(0.5rem,2.5vw,1.4rem)] mt-[10vh] md:mt-[5vh] font-light tracking-wide text-blue-100"
         >
-          The more we define ourselves, the more we forget what we are.
+          I build full-stack web apps, UX/UI systems, AI collaboration tools, human-aligned software, and clarity-driven platforms.
         </motion.p>
 
         <motion.p
@@ -55,7 +55,7 @@ const Home = () => (
           transition={{ delay: 9, duration:5, ease: 'easeOut' }}
           className="text-[clamp(0.38rem,2.4vw,1.25rem)] mt-[10vh] md:mt-[5vh] md:font-semibold tracking-wide font-light text-orange-100"
         >
-          Unnecessary self-definitions and limits breed insecurity and corruption.
+          Executed with guts and vision,
         </motion.p>
 
         <motion.p
@@ -64,7 +64,7 @@ const Home = () => (
           transition={{ delay: 15, duration: 2, ease: 'easeOut' }}
           className="text-[clamp(0.4rem,2.5vw,1.5rem)] mt-[10vh] md:mt-[5vh] sm:font-bold tracking-wide text-yellow-200"
         >
-          Freedom, clarity, and connection are available in their absence.
+          Built for alignment- technical, moral, and human.
         </motion.p>
       </div>
     </div>
