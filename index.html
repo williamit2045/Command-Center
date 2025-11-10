@@ -1,14 +1,55 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>React App</title><script defer="defer" src="/static/js/main.749c29d3.js"></script><link href="/static/css/main.41ed968c.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div>
+Here’s a sturdier `index.html` with a **nav-preserving Projects override** and a **full Interests hide**. Paste over your current file.
 
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <link rel="icon" href="/favicon.ico"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#000000"/>
+  <meta name="description" content="Web site created using create-react-app"/>
+  <link rel="apple-touch-icon" href="/logo192.png"/>
+  <link rel="manifest" href="/manifest.json"/>
+  <title>React App</title>
+  <script defer src="/static/js/main.749c29d3.js"></script>
+  <link href="/static/css/main.41ed968c.css" rel="stylesheet">
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
 
+  <!-- Projects: keep nav, replace content -->
   <script>
-(function () {
-  const render = () => {
-    const h = (location.hash || "").toLowerCase();
-    if (h.includes("projects")) {
-      const root = document.getElementById("root") || document.querySelector("main") || document.body;
-      if (!root) return;
+  (function () {
+    let cachedNav = "";
+
+    function findNav() {
+      const root = document.getElementById("root");
+      if (!root) return null;
+      return (
+        root.querySelector("nav[role='navigation']") ||
+        root.querySelector("header nav") ||
+        root.querySelector("header") ||
+        root.querySelector("nav")
+      );
+    }
+
+    function renderProjects() {
+      const h = (location.hash || "").toLowerCase();
+      if (!h.includes("projects")) return;
+
+      const root = document.getElementById("root") || document.body;
+
+      // cache nav after React mounts
+      if (!cachedNav) {
+        const navEl = findNav();
+        if (!navEl) { setTimeout(renderProjects, 150); return; }
+        cachedNav = navEl.closest("header") ? navEl.closest("header").outerHTML : navEl.outerHTML;
+      }
+
       root.innerHTML = `
+        ${cachedNav}
         <section style="min-height:80vh;display:flex;align-items:center;justify-content:center;background:#0b1220;color:#e6edf3;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
           <div style="max-width:680px;padding:24px;text-align:center">
             <h1 style="font-size:28px;margin:0 0 8px">Projects</h1>
@@ -20,46 +61,40 @@
           </div>
         </section>`;
     }
-  };
-  window.addEventListener("hashchange", render);
-  window.addEventListener("DOMContentLoaded", render);
-  setTimeout(render, 200);
-})();
-</script>
 
+    const ensure = () => { setTimeout(renderProjects, 0); setTimeout(renderProjects, 200); setTimeout(renderProjects, 600); };
+    window.addEventListener("DOMContentLoaded", ensure);
+    window.addEventListener("hashchange", ensure);
+  })();
+  </script>
 
+  <!-- About: hide entire Interests section -->
   <script>
-(function () {
-  const killInterests = () => {
-    const h = (location.hash || "").toLowerCase();
-    if (!h.includes("about")) return;            // (safe guard)
+  (function () {
+    function hideInterests() {
+      const h = (location.hash || "").toLowerCase();
+      if (!h.includes("about")) return;
 
-    // Find the "Interests" heading
-    const all = document.querySelectorAll("h1,h2,h3,div,span,p");
-    let heading = null;
-    for (const el of all) {
-      const t = (el.textContent || "").trim();
-      if (/^interests$/i.test(t)) { heading = el; break; }
+      const headings = Array.from(document.querySelectorAll("h1,h2,h3"));
+      const hit = headings.find(el => (el.textContent || "").trim().toLowerCase() === "interests");
+      if (!hit) { setTimeout(hideInterests, 150); return; }
+
+      const section = hit.closest("section");
+      if (section) {
+        section.style.display = "none";
+        return;
+      }
+      // fallback: hide heading and its next major container
+      hit.style.display = "none";
+      let sib = hit.parentElement && hit.parentElement.nextElementSibling;
+      if (sib) sib.style.display = "none";
     }
-    if (!heading) return;
 
-    // Hide the heading
-    heading.style.display = "none";
-
-    // Hide the block that follows (the cards container)
-    let target = heading.parentElement.nextElementSibling;
-    // walk down one level if the sibling is just a wrapper
-    if (target && target.children && target.children.length === 1) {
-      target = target.children[0];
-    }
-    if (target) target.style.display = "none";
-  };
-
-  window.addEventListener("DOMContentLoaded", killInterests);
-  window.addEventListener("hashchange", killInterests);
-  setTimeout(killInterests, 250);
-})();
-</script>
-
-
-</body></html>
+    const ensure = () => { setTimeout(hideInterests, 0); setTimeout(hideInterests, 200); setTimeout(hideInterests, 600); };
+    window.addEventListener("DOMContentLoaded", ensure);
+    window.addEventListener("hashchange", ensure);
+  })();
+  </script>
+</body>
+</html>
+```
